@@ -4,23 +4,27 @@
   "description": "A chatty appy chat app",
   "main": "index.js",
   "scripts": {
-    "start": "npm run start-server & npm run build-watch",
+    "start": "USE_DOTENV=true npm run start-server & npm run build-watch",
     "start-server": "nodemon server -w server",
     "build-watch": "webpack -w",
-    "seed": "node seed.js"
+    "seed": "USE_DOTENV=true node seed.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.15.3",
     "bootstrap": "^3.3.7",
+    "dotenv": "^6.1.0",
     "express": "^4.14.1",
-    "morgan": "^1.8.1",
+    "morgan": "^1.9.1",
     "pg": "^6.1.2",
     "pg-hstore": "^2.3.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-redux": "^5.1.1",
     "react-router-dom": "^4.0.0",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "sequelize": "^4.4.0",
     "socket.io": "^1.7.2"
   },

@@ -17,8 +17,11 @@ class NewMessageEntry extends Component {
     event.preventDefault();
     const content = this.props.newMessageEntry;
     const channelId = this.props.channelId;
-    this.props.post(content, channelId);
-    event.target.value = null
+    try {
+      this.props.post(content, channelId);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   render() {
@@ -26,6 +29,7 @@ class NewMessageEntry extends Component {
       <form id="new-message-form" onSubmit={this.handleSubmit}>
         <div className="input-group input-group-lg">
           <input
+            value={this.props.newMessageEntry}
             className="form-control"
             type="text"
             name="content"

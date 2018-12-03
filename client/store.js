@@ -33,7 +33,7 @@ export const fetchMessages = () => {
 
 export const postMessage = (newMessage, channelId) => {
   return async (dispatch, getState) => {
-    const {data} = await axios.post('/api/messages', {
+    const { data } = await axios.post('/api/messages', {
       content: newMessage,
       name: null,
       channelId
@@ -61,6 +61,7 @@ const reducer = (state = initialState, action) => {
     case GOT_NEW_MESSAGE_FROM_SERVER:
       return {
         ...state,
+        newMessageEntry: '',
         messages: [...state.messages, action.message]
       };
     default:

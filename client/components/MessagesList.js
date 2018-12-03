@@ -15,6 +15,7 @@ class MessagesList extends Component {
   }
 
   render() {
+    //console.log(this.props.messages);
     const channelId = Number(this.props.match.params.channelId); // because it's a string "1", not a number!
     const messages = this.props.messages;
     const filteredMessages = messages.filter(

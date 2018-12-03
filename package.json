@@ -4,10 +4,10 @@
   "description": "A chatty appy chat app",
   "main": "index.js",
   "scripts": {
-    "start": "USE_DOTENV=true npm run start-server & npm run build-watch",
+    "start": "npm run start-server & npm run build-watch",
     "start-server": "nodemon server -w server",
     "build-watch": "webpack -w",
-    "seed": "USE_DOTENV=true node seed.js"
+    "seed": "node seed.js"
   },
   "author": "",
   "license": "ISC",

@@ -6,7 +6,6 @@ import { fetchMessages } from '../store';
 
 class MessagesList extends Component {
   componentDidMount() {
-    console.log(this.props);
     try {
       this.props.fetchInitialMessages();
     } catch (error) {
@@ -15,7 +14,6 @@ class MessagesList extends Component {
   }
 
   render() {
-    //console.log(this.props.messages);
     const channelId = Number(this.props.match.params.channelId); // because it's a string "1", not a number!
     const messages = this.props.messages;
     const filteredMessages = messages.filter(
@@ -29,7 +27,7 @@ class MessagesList extends Component {
             <Message message={message} key={message.id} />
           ))}
         </ul>
-        <NewMessageEntry />
+        <NewMessageEntry channelId={channelId}/>
       </div>
     );
   }

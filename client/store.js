@@ -7,6 +7,7 @@ import socket from './socket';
 const GOT_MESSAGES_FROM_SERVER = 'GOT_MESSAGES_FROM_SERVER';
 const WRITE_MESSAGE = 'WRITE_MESSAGE';
 const GOT_NEW_MESSAGE_FROM_SERVER = 'GOT_NEW_MESSAGE_FROM_SERVER';
+const UPDATE_NAME = 'UPDATE_NAME';
 
 /* Action creators */
 export const gotMessagesFromServer = messages => ({
@@ -24,6 +25,11 @@ export const gotNewMessageFromServer = message => ({
   message
 });
 
+export const updateName = name => ({
+  type: UPDATE_NAME,
+  name
+});
+
 /* Thunk creators */
 export const fetchMessages = () => {
   return async dispatch => {
@@ -32,11 +38,11 @@ export const fetchMessages = () => {
   };
 };
 
-export const postMessage = (newMessage, channelId) => {
-  return async (dispatch, getState) => {
+export const postMessage = (newMessage, channelId, name) => {
+  return async dispatch => {
     const { data } = await axios.post('/api/messages', {
       content: newMessage,
-      name: null,
+      name: name,
       channelId
     });
     dispatch(gotNewMessageFromServer(data));
@@ -47,7 +53,8 @@ export const postMessage = (newMessage, channelId) => {
 /* Initial State */
 const initialState = {
   messages: [],
-  newMessageEntry: ''
+  newMessageEntry: '',
+  name: ''
 };
 
 /* Reducer */
@@ -65,6 +72,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         newMessageEntry: '',
         messages: [...state.messages, action.message]
+      };
+    case UPDATE_NAME:
+      return {
+        ...state,
+        name: action.name
       };
     default:
       return state;

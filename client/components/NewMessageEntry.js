@@ -15,10 +15,10 @@ class NewMessageEntry extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const content = this.props.newMessageEntry;
-    const channelId = this.props.channelId;
+    const {newMessageEntry, channelId, name} = this.props
+
     try {
-      this.props.post(content, channelId);
+      this.props.post(newMessageEntry, channelId, name);
     } catch (error) {
       console.error(error);
     }
@@ -48,12 +48,13 @@ class NewMessageEntry extends Component {
 }
 
 const mapStateToProps = state => ({
-  newMessageEntry: state.newMessageEntry
+  newMessageEntry: state.newMessageEntry,
+  name: state.name
 });
 
 const mapDispatchToProps = dispatch => ({
   write: message => dispatch(writeMessage(message)),
-  post: (newMessage, channelId) => dispatch(postMessage(newMessage, channelId))
+  post: (newMessage, channelId, name) => dispatch(postMessage(newMessage, channelId, name))
 });
 
 export default connect(

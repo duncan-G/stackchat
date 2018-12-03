@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import reduxThunkMiddleware from 'redux-thunk';
 import axios from 'axios';
+import socket from './socket';
 
 /* Action types */
 const GOT_MESSAGES_FROM_SERVER = 'GOT_MESSAGES_FROM_SERVER';
@@ -39,6 +40,7 @@ export const postMessage = (newMessage, channelId) => {
       channelId
     });
     dispatch(gotNewMessageFromServer(data));
+    socket.emit('new-message', data);
   };
 };
 
